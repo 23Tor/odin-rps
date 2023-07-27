@@ -20,6 +20,10 @@
             }
         }
 
+        let playerScore = 0
+        let computerScore = 0
+        let winner = ''
+
         function playRound(playerSelection, computerSelection) {
             let userChoice = playerSelection.toLowerCase()
             let computerChoice = computerSelection.toLowerCase()
@@ -30,18 +34,41 @@
                 scissors: 'paper'
             }
 
+            // Tie
             if (userChoice === computerChoice) {
-                return "It's a tie!"
+                tie = 'Tie!'
+            // Win
             } else if (results[userChoice] === computerChoice) {
-                return `You Win!`
+                winner = `You Win!`
+                playerScore++
+            // Lose
             } else {
-                return `You Lose!`;
+                winner = `You Lose!`;
+                computerScore++
+            }
+        }
+        
+        function game() {
+            for (let round = 1; round <= 5; round++) {
+                const playerSelection = prompt('Input "rock", "paper", or "scissors" for round ' + round + ':')
+                const computerSelection = getComputerChoice()
+
+                playRound(playerSelection, computerSelection)
+
+                console.log(`Round ${round}: ${winner}`)
+                console.log(`Player Score: ${playerScore}, Computer Score: ${computerScore}`)
+            }
+
+            if (playerScore > computerScore) {
+                console.log("Congratulations! You won the game!")
+            } else if (playerScore < computerScore) {
+                console.log("Sorry, you lost the game. Better luck next time!")
+            } else {
+                console.log("It's a tie! The game ended in a draw.")
             }
         }
 
-        const playerSelection = "rock";
-        const computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection));
+        game()
     </script>
 </body>
 
