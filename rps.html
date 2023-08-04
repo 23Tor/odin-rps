@@ -2,74 +2,35 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
 
 <body>
-    <script>
-        function getComputerChoice() {
-            computerRoll = Math.floor(Math.random() * 100)
-            if (computerRoll < 33) {
-                return 'Rock'
-            } else if (computerRoll < 66 && computerRoll >= 33) {
-                return 'Paper'
-            } else {
-                return 'Scissors'
-            }
-        }
+  <div class="score-box">
+    <div class="glass"></div>
+    <span>GLASS</span>
+  </div>
+  </div>
+  <div id="cards">
+    <div class="card">
+      <img
+        src="https://images.pexels.com/photos/1901033/pexels-photo-1901033.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2">
+    </div>
+    <div class="card">
+      <img
+        src="https://images.pexels.com/photos/5244310/pexels-photo-5244310.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2">
+    </div>
+    <div class="card">
+      <img src="img/scissor.jpg">
+    </div>
+  </div>
 
-        let playerScore = 0
-        let computerScore = 0
-        let winner = ''
-
-        function playRound(playerSelection, computerSelection) {
-            let userChoice = playerSelection.toLowerCase()
-            let computerChoice = computerSelection.toLowerCase()
-
-            const results = {
-                rock: 'scissors',
-                paper: 'rock',
-                scissors: 'paper'
-            }
-
-            // Tie
-            if (userChoice === computerChoice) {
-                tie = 'Tie!'
-            // Win
-            } else if (results[userChoice] === computerChoice) {
-                winner = `You Win!`
-                playerScore++
-            // Lose
-            } else {
-                winner = `You Lose!`;
-                computerScore++
-            }
-        }
-        
-        function game() {
-            for (let round = 1; round <= 5; round++) {
-                const playerSelection = prompt('Input "rock", "paper", or "scissors" for round ' + round + ':')
-                const computerSelection = getComputerChoice()
-
-                playRound(playerSelection, computerSelection)
-
-                console.log(`Round ${round}: ${winner}`)
-                console.log(`Player Score: ${playerScore}, Computer Score: ${computerScore}`)
-            }
-
-            if (playerScore > computerScore) {
-                console.log("Congratulations! You won the game!")
-            } else if (playerScore < computerScore) {
-                console.log("Sorry, you lost the game. Better luck next time!")
-            } else {
-                console.log("It's a tie! The game ended in a draw.")
-            }
-        }
-
-        game()
-    </script>
+  <div id="blob"></div>
+  <div id="blur"></div>
 </body>
 
 </html>
