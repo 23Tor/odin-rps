@@ -11,63 +11,70 @@ window.onpointermove = event => {
 }
 
 // Script for gameplay
+// Computer choice
 function getComputerChoice() {
-    computerRoll = Math.floor(Math.random() * 100)
+    const computerRoll = Math.floor(Math.random() * 100)
     if (computerRoll < 33) {
-        return 'Rock'
-    } else if (computerRoll < 66 && computerRoll >= 33) {
-        return 'Paper'
+        return 'rock'
+    } else if (computerRoll >= 33 && computerRoll < 66) {
+        return 'paper';
     } else {
-        return 'Scissors'
+        return 'scissors'
     }
 }
 
-let playerScore = 0
-let computerScore = 0
-let winner = ''
-
+// Play a single round
 function playRound(playerSelection, computerSelection) {
-    let userChoice = playerSelection.toLowerCase()
-    let computerChoice = computerSelection.toLowerCase()
-
     const results = {
         rock: 'scissors',
         paper: 'rock',
         scissors: 'paper'
     }
-
+    
     // Tie
-    if (userChoice === computerChoice) {
-        tie = 'Tie!'
+    if (playerSelection === computerSelection) {
+        console.log("Tie")
+        return 'tie'
     // Win
-    } else if (results[userChoice] === computerChoice) {
-        winner = `You Win!`
-        playerScore++
+    } else if (results[playerSelection] === computerSelection) {
+        console.log("Player")
+        return `player`
     // Lose
     } else {
-        winner = `You Lose!`;
+        console.log("Computer")
+        return `computer`;
+    }
+}
+
+// Update the scores
+function updateScore(result) {
+    if (result === 'player') {
+        playerScore++
+    } else if (result === 'computer') {
         computerScore++
     }
+
+    // Display the score
+    const playerScoreElement = document.getElementById('player-score')
+    const computerScoreElement = document.getElementById('computer-score')
+
+    playerScoreElement.textContent = `PLAYER SCORE: ${playerScore}`
+    computerScoreElement.textContent = `COMPUTER SCORE: ${computerScore}`
 }
 
-function game() {
-    for (let round = 1; round <= 5000; round++) {
-        const playerSelection = prompt('Input "rock", "paper", or "scissors" for round ' + round + ':')
+// Event listener on card click
+const cards = document.querySelectorAll('.card')
+cards.forEach(card => {
+    card.addEventListener('click', () => {
+        const playerSelection = card.dataset.choice
         const computerSelection = getComputerChoice()
+        const roundResult = playRound(playerSelection, computerSelection)
 
-        playRound(playerSelection, computerSelection)
+        updateScore(roundResult)
+    })
+})
 
-        console.log(`Round ${round}: ${winner}`)
-        console.log(`Player Score: ${playerScore}, Computer Score: ${computerScore}`)
-    }
+let playerScore = 0
+let computerScore = 0
 
-    if (playerScore > computerScore) {
-        console.log("Congratulations! You won the game!")
-    } else if (playerScore < computerScore) {
-        console.log("Sorry, you lost the game. Better luck next time!")
-    } else {
-        console.log("It's a tie! The game ended in a draw.")
-    }
-}
-
-game()
+console.log("Click on a card to play a round")
