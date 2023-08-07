@@ -36,10 +36,20 @@ body {
   z-index: 3;
   background-color: rgba(255, 255, 255, .15);  
   backdrop-filter: blur(5px);
-  height: 100px;
-  width: 500px;
   font-family: 'Rajdhani', sans-serif;
+  white-space: nowrap;
+}
+
+.score-box span{
+  margin: 5px 0;
   font-size: 48px;
+}
+
+.glass {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #cards {
