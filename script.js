@@ -74,7 +74,6 @@ cards.forEach(card => {
     })
 })
 
+// Set score variables to 0
 let playerScore = 0
 let computerScore = 0
-
-console.log("Click on a card to play a round")
